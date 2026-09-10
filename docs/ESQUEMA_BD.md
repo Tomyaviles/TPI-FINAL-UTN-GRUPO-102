@@ -74,7 +74,6 @@ erDiagram
         timestamp fecha_hora
     }
 ```
-
     Explicación de Relaciones entre Entidades
 sedes 1 ─── N socios (Una sede tiene muchos socios)
 
