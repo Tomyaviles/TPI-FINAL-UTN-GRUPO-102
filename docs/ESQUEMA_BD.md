@@ -17,7 +17,7 @@ El modelo evita la sobreingeniería y las tablas intermedias innecesarias, permi
 
 ---
 
-## Diagrama Entidad-Relación (DER)
+## 📊 Diagrama Entidad-Relación (DER)
 
 ```mermaid
 erDiagram
@@ -73,8 +73,7 @@ erDiagram
         uuid sede_id FK
         timestamp fecha_hora
     }
-
-
+```
     ## 🔗 Explicación de Relaciones entre Entidades
 
 1. **`sedes` 1 ─── N `socios` (Una sede tiene muchos socios)**
