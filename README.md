@@ -60,6 +60,7 @@ Sistema web multisede enfocado en la administración integral de gimnasios. La s
 ## Estructura del Repositorio
 * [`/docs`](./docs): Documentación técnica e informes del proyecto.
   * [`ESQUEMA_BD.md`](./docs/ESQUEMA_BD.md): Diagrama Entidad-Relación y definición del modelo de datos.
+  * [`MODULOS.md`](./docs/MODULOS.md): Listado de módulos del sistema y mapeo a la arquitectura del repositorio.
 * `/src`: Código fuente de la aplicación *(en desarrollo)*.
 ---
 
