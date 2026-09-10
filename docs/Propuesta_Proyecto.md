@@ -1,10 +1,10 @@
-# 📚 TRABAJO FINAL INTEGRADOR — UTN
+# TRABAJO FINAL INTEGRADOR — UTN
 ## 1.ª Entrega: Propuesta de Proyecto y Repositorio
 **Sistema de gestión para gimnasios**
 
 ---
 
-### 📋 Información del Grupo
+### Información del Grupo
 * **Integrantes:** Franco Siri | Tomás Avilés | Israel García
 * **Tutor asignado:** Gerardo A. Herrera Molas
 * **Repositorio único:** [https://github.com/Tomyaviles/TPI-FINAL-UTN-GRUPO-102](https://github.com/Tomyaviles/TPI-FINAL-UTN-GRUPO-102)
@@ -65,7 +65,7 @@ Frente a alternativas como un backend separado en Java con Spring Boot o en PHP 
 
 Respecto de la base de datos, se optó por un motor relacional y no por uno documental porque el dominio es fuertemente relacional: socios, planes, membresías, pagos e ingresos son entidades con vínculos claros y reglas de integridad que conviene hacer cumplir desde el esquema. Supabase, además de PostgreSQL administrado, aporta autenticación, almacenamiento de archivos y políticas de seguridad a nivel de fila, funcionalidades que de otro modo habría que desarrollar y mantener.
 
-#### 🌐 Justificación de la Elección de Plataforma Web
+## Justificación de la Elección de Plataforma Web
 Elegimos desarrollar una plataforma Web porque satisface de forma eficiente los dos perfiles principales de uso del sistema sin requerir la instalación de software local:
 * **Gestión Administrativa y Multisede (PC / Tablet):** El dueño, la administración y el personal de recepción requieren pantallas completas para la toma de decisiones, visualización de métricas, reportes de facturación y carga rápida de cobros. La plataforma Web permite centralizar toda la información de múltiples sedes en tiempo real desde cualquier computadora con navegador web.
 * **Autogestión en Movilidad (Socios e Instructores desde el Celular):** El socio no necesita instalar una aplicación nativa desde la tienda de aplicaciones (evitando la fricción de descarga). Puede acceder al sistema directamente desde el navegador de su teléfono para consultar su estado de cuota, vencimientos y mostrar su credencial digital.

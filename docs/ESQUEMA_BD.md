@@ -72,4 +72,3 @@ erDiagram
         uuid socio_id FK
         uuid sede_id FK
         timestamp fecha_hora
-    }
