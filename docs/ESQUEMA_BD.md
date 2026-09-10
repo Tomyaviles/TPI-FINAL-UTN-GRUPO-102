@@ -1,4 +1,4 @@
-# Esquema de Base de Datos — Sistema de Gestión para Gimnasios
+# 🗄️ Esquema de Base de Datos — Sistema de Gestión para Gimnasios
 
 **Materia:** Trabajo Final Integrador (UTN)  
 **Grupo:** 102  
@@ -6,7 +6,7 @@
 
 ---
 
-## Enfoque Arquitectónico
+## 📌 Enfoque Arquitectónico
 
 Siguiendo las recomendaciones recibidas para optimizar los tiempos de desarrollo, el modelo de datos se diseñó bajo un esquema simplificado y eficiente mediante **Supabase (PostgreSQL)**. 
 
@@ -17,7 +17,7 @@ El modelo evita la sobreingeniería y las tablas intermedias innecesarias, permi
 
 ---
 
-## Diagrama Entidad-Relación (DER)
+## 📊 Diagrama Entidad-Relación (DER)
 
 ```mermaid
 erDiagram
@@ -72,4 +72,3 @@ erDiagram
         uuid socio_id FK
         uuid sede_id FK
         timestamp fecha_hora
-    }
