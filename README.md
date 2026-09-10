@@ -1,10 +1,10 @@
-# 🏋️‍♂️ Sistema de Gestión para Gimnasios (Multisede) — TPI UTN
+# Sistema de Gestión para Gimnasios (Multisede) — TPI UTN
 
 Trabajo Final Integrador para la Tecnicatura Universitaria en Programación a Distancia (UTN).
 
 ---
 
-## 👥 Integrantes (Grupo 102)
+## Integrantes (Grupo 102)
 * **Franco Siri**
 * **Tomás Avilés**
 * **Israel García**
@@ -15,12 +15,12 @@ Trabajo Final Integrador para la Tecnicatura Universitaria en Programación a Di
 
 ---
 
-## 📌 Descripción del Proyecto
+## Descripción del Proyecto
 Sistema web multisede enfocado en la administración integral de gimnasios. La solución permite centralizar el control de socios, la gestión de planes y cuotas mensuales, el registro automatizado de vencimientos y el control de ingresos/asistencia en tiempo real, adaptándose tanto a la administración general como a la autogestión de socios desde dispositivos móviles.
 
 ---
 
-## 🚀 Funcionalidades del Sistema
+## Funcionalidades del Sistema
 
 ### 1. Autenticación y Gestión de Roles
 - Inicio de sesión y permisos diferenciados según el rol: **Administrador**, **Recepción**, **Profesores** y **Socios**.
@@ -47,7 +47,7 @@ Sistema web multisede enfocado en la administración integral de gimnasios. La s
 
 ---
 
-## 🛠️ Stack Tecnológico
+## Stack Tecnológico
 * **Frontend:** Next.js (App Router) + React + TypeScript
 * **Estilos / UI:** Tailwind CSS
 * **Backend:** Next.js Route Handlers / Server Actions (Node.js)
@@ -57,13 +57,13 @@ Sistema web multisede enfocado en la administración integral de gimnasios. La s
 
 ---
 
-## 📂 Estructura del Repositorio
-* [`/docs`](./docs): Documentación técnica, propuesta inicial e informes del proyecto.
+## Estructura del Repositorio
+* [`/docs`](./docs): Documentación técnica e informes del proyecto.
+  * [`ESQUEMA_BD.md`](./docs/ESQUEMA_BD.md): Diagrama Entidad-Relación y definición del modelo de datos.
 * `/src`: Código fuente de la aplicación *(en desarrollo)*.
-
 ---
 
-## 📅 Estado de Entregas y Cronograma
+## Estado de Entregas y Cronograma
 - [x] **1.ª Entrega (30/08):** Propuesta de proyecto, stack tecnológico y repositorio inicial.
 - [ ] **2.ª Entrega (27/09):** Esquema de base de datos y listado de módulos aprobados (Regularidad).
 - [ ] **Entrega Final (14/11):** Repositorio completo, servicio en la nube activo, informe y video explicativo.
