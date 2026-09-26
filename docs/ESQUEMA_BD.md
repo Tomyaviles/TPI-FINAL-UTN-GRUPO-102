@@ -1,3 +1,4 @@
+```mermaid
 erDiagram
     SEDES ||--o{ SOCIOS : "pertenece a"
     SEDES ||--o{ ASISTENCIAS : "registra en"
