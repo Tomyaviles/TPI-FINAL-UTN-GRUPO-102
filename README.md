@@ -58,10 +58,19 @@ Sistema web multisede enfocado en la administración integral de gimnasios. La s
 ---
 
 ## Estructura del Repositorio
+* [`/frontend`](./frontend): Interfaz de usuario *(etapa de implementación)*.
+* [`/backend`](./backend): Lógica del servidor y conexión con Supabase *(etapa de implementación)*.
+* [`/database`](./database): Scripts de la base de datos.
+  * [`schema.sql`](./database/schema.sql): Creación de tablas, claves y relaciones.
 * [`/docs`](./docs): Documentación técnica e informes del proyecto.
+  * [`Propuesta_Proyecto.md`](./docs/Propuesta_Proyecto.md): Propuesta inicial, alcance y cronograma.
   * [`ESQUEMA_BD.md`](./docs/ESQUEMA_BD.md): Diagrama Entidad-Relación y definición del modelo de datos.
-  * [`MODULOS.md`](./docs/MODULOS.md): Listado de módulos del sistema y mapeo a la arquitectura del repositorio.
-* `/src`: Código fuente de la aplicación *(en desarrollo)*.
+  * [`explicacion de relaciones.md`](./docs/explicacion%20de%20relaciones.md): Explicación de las relaciones entre entidades.
+  * [`script_sql.md`](./docs/script_sql.md): Script SQL comentado campo por campo.
+  * [`MODULOS.md`](./docs/MODULOS.md): Listado de módulos del sistema y arquitectura prevista.
+
+Como el proyecto usa Next.js, frontend y backend conviven en la misma aplicación. La separación en carpetas refleja las dos capas del sistema; la organización interna de cada una se define en la etapa de implementación.
+
 ---
 
 ## Estado de Entregas y Cronograma

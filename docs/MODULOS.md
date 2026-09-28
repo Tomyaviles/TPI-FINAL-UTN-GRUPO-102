@@ -8,7 +8,7 @@
 
 ## Criterio de Modularización
 
-El sistema se organiza en módulos funcionales, cada uno alineado a un actor o proceso de negocio identificado en la Propuesta de Proyecto. Cada módulo se corresponde con una o más entidades del Esquema de Base de Datos y, en la implementación, con una carpeta propia dentro de `/src`[cite: 4].
+El sistema se organiza en módulos funcionales, cada uno alineado a un actor o proceso de negocio identificado en la Propuesta de Proyecto. Cada módulo se corresponde con una o más entidades del Esquema de Base de Datos y, en la implementación, con una carpeta propia dentro de `/src`.
 
 **Estados posibles:** 
 * `Diseñado`: Definido en esquema/alcance, código aún no iniciado.
@@ -60,3 +60,5 @@ Cada módulo del núcleo mínimo se traduce, en el proyecto Next.js (App Router)
 ├── lib/
 │   └── supabase/          → Cliente y helpers de conexión a Supabase (transversal)
 └── components/            → Componentes de UI compartidos entre módulos
+
+```
