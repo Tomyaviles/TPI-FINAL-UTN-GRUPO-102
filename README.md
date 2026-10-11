@@ -72,7 +72,7 @@ Sistema web multisede enfocado en la administración integral de gimnasios. La s
    ```bash
    npm install
    ```
-2. Copiar `.env.example` como `.env.local` y completar la URL y la anon key del proyecto de Supabase (Project Settings → API).
+2. Copiar `.env.example` como `.env.local` y completar la URL y la publishable key del proyecto de Supabase (Project Settings → API Keys).
 3. Levantar el servidor de desarrollo:
    ```bash
    npm run dev
