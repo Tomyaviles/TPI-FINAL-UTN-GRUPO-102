@@ -56,8 +56,7 @@ CREATE TABLE asistencias (
   fecha_hora TIMESTAMP WITH TIME ZONE DEFAULT NOW()
 );
 
--- 6. PERFILES (nueva, no estaba en el esquema original)
--- Guarda el rol de cada usuario del sistema (RF-02).
+-- 6. PERFILES: rol y sede de cada usuario del sistema
 CREATE TABLE perfiles (
   id UUID PRIMARY KEY REFERENCES auth.users(id) ON DELETE CASCADE,
   nombre TEXT,
