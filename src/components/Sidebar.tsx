@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { cerrarSesion } from "@/app/(auth)/login/actions";
 
 const secciones = [
   { href: "/dashboard", label: "Dashboard" },
@@ -36,6 +37,14 @@ export default function Sidebar() {
           );
         })}
       </nav>
+      <form action={cerrarSesion} className="px-2 pb-3 md:mt-4">
+        <button
+          type="submit"
+          className="w-full rounded px-3 py-2 text-left text-sm text-slate-400 hover:bg-slate-800 hover:text-slate-100"
+        >
+          Cerrar sesión
+        </button>
+      </form>
     </aside>
   );
 }
