@@ -62,3 +62,30 @@ export default async function SociosPage() {
   // ...
 }
 ```
+
+## Roles y permisos
+
+Qué ve cada rol en el menú está en `src/lib/permisos.ts` (lista `SECCIONES`).
+Si agregás una pantalla nueva, sumala ahí con sus roles y poné `requerirRol([...])`
+al principio de la página.
+
+| Rol | Secciones | Datos (RLS, `20261013120000_politicas_por_rol.sql`) |
+|---|---|---|
+| Administrador | Todas + Usuarios | Todo |
+| Recepción | Socios, Cobros, Ingreso | Socios, pagos y asistencias de su sede |
+| Profesor | (ninguna por ahora, va a `/inicio`) | Lectura de socios y asistencias de su sede |
+| Socio | Ingreso | Solo sus propios datos |
+
+Sedes y planes los pueden leer todos, pero solo el admin los modifica.
+
+## Crear recepcionistas y profesores desde la app
+
+La pantalla **Usuarios** (solo admin) crea el usuario en Auth y su perfil de una.
+Necesita la secret key en `.env.local`:
+
+```
+SUPABASE_SECRET_KEY=sb_secret_...
+```
+
+Se saca de Supabase → Project Settings → API Keys → Secret keys. No se sube al repo
+ni se pega en ningún lado público: con esa key se saltea todo el RLS.

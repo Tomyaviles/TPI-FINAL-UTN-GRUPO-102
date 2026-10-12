@@ -1,6 +1,9 @@
 import ModuloPendiente from "@/components/ModuloPendiente";
+import { requerirRol } from "@/lib/auth";
 
-export default function CobrosPage() {
+export default async function CobrosPage() {
+  await requerirRol(["admin", "recepcion"]);
+
   return (
     <ModuloPendiente
       titulo="Cobros"

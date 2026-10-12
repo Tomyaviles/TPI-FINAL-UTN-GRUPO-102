@@ -1,6 +1,9 @@
 import ModuloPendiente from "@/components/ModuloPendiente";
+import { requerirRol } from "@/lib/auth";
 
-export default function IngresoPage() {
+export default async function IngresoPage() {
+  await requerirRol(["admin", "recepcion", "socio"]);
+
   return (
     <ModuloPendiente
       titulo="Control de Ingreso"

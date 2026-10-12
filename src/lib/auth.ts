@@ -1,5 +1,6 @@
 import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
+import { paginaInicio } from "@/lib/permisos";
 import type { Perfil, Rol } from "@/types/database";
 
 // Funciones para saber quién está logueado y con qué rol.
@@ -44,11 +45,13 @@ export function esAdmin(perfil: Perfil | null) {
 }
 
 // Para poner al principio de una página que solo pueden ver ciertos roles.
-// Si no hay sesión manda al login; si el rol no corresponde, al dashboard.
+// Si el usuario no tiene perfil va a /inicio (ahí se le explica qué pasa);
+// si el rol no corresponde, a la página de inicio de su rol.
 // Devuelve el perfil así la página no lo tiene que volver a buscar.
+// (Si no hay sesión ni llega acá: el middleware ya lo mandó al login.)
 export async function requerirRol(roles: Rol[]) {
   const perfil = await obtenerPerfil();
-  if (!perfil) redirect("/login");
-  if (!tieneRol(perfil, roles)) redirect("/dashboard");
+  if (!perfil) redirect("/inicio");
+  if (!tieneRol(perfil, roles)) redirect(paginaInicio(perfil.rol));
   return perfil;
 }

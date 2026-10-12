@@ -1,6 +1,9 @@
 import ModuloPendiente from "@/components/ModuloPendiente";
+import { requerirRol } from "@/lib/auth";
 
-export default function PlanesPage() {
+export default async function PlanesPage() {
+  await requerirRol(["admin"]);
+
   return (
     <ModuloPendiente
       titulo="Planes"

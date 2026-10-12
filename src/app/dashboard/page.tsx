@@ -1,5 +1,5 @@
 import { createClient } from "@/lib/supabase/server";
-import { obtenerPerfil } from "@/lib/auth";
+import { requerirRol } from "@/lib/auth";
 
 // Por ahora el dashboard solo verifica la conexión con Supabase mostrando
 // cuántos registros hay en cada tabla. Las métricas reales (RF-14) van acá.
@@ -20,7 +20,7 @@ export default async function DashboardPage() {
     );
   }
 
-  const perfil = await obtenerPerfil();
+  const perfil = await requerirRol(["admin"]);
   const supabase = await createClient();
   const conteos = await Promise.all(
     tablas.map(async (tabla) => {
@@ -38,17 +38,9 @@ export default async function DashboardPage() {
         Módulo 6 — en desarrollo. Conexión con la base:
       </p>
 
-      {/* Si el usuario no tiene fila en perfiles, RLS no le deja ver nada */}
-      {perfil ? (
-        <p className="mt-2 text-sm text-slate-600">
-          Sesión iniciada como <b>{perfil.nombre ?? "sin nombre"}</b> ({perfil.rol})
-        </p>
-      ) : (
-        <p className="mt-2 rounded border border-amber-300 bg-amber-50 p-3 text-sm">
-          Tu usuario no tiene perfil cargado. Pedile a un admin que lo agregue
-          (ver docs/USUARIOS_ADMIN.md).
-        </p>
-      )}
+      <p className="mt-2 text-sm text-slate-600">
+        Sesión iniciada como <b>{perfil.nombre ?? "sin nombre"}</b> ({perfil.rol})
+      </p>
       <div className="mt-4 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5">
         {conteos.map(({ tabla, count, error }) => (
           <div key={tabla} className="rounded border border-slate-200 bg-white p-4">

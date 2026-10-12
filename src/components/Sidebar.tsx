@@ -3,24 +3,32 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { cerrarSesion } from "@/app/(auth)/login/actions";
+import { NOMBRE_ROL, seccionesDelRol } from "@/lib/permisos";
+import type { Rol } from "@/types/database";
 
-const secciones = [
-  { href: "/dashboard", label: "Dashboard" },
-  { href: "/socios", label: "Socios y Sedes" },
-  { href: "/planes", label: "Planes" },
-  { href: "/cobros", label: "Cobros" },
-  { href: "/ingreso", label: "Ingreso" },
-];
-
-export default function Sidebar() {
+// El perfil lo busca el layout (que corre en el servidor) y lo pasa por props
+export default function Sidebar({
+  nombre,
+  rol,
+}: {
+  nombre: string | null;
+  rol: Rol | null;
+}) {
   const pathname = usePathname();
 
   // El login se muestra sin menú
   if (pathname.startsWith("/login")) return null;
 
+  // Solo mostramos lo que el rol puede ver
+  const secciones = seccionesDelRol(rol);
+
   return (
     <aside className="w-full border-b border-slate-200 bg-slate-900 text-slate-100 md:min-h-screen md:w-56 md:border-b-0">
-      <div className="px-4 py-4 text-lg font-bold">Gestión Gimnasios</div>
+      <div className="px-4 pt-4 text-lg font-bold">Gestión Gimnasios</div>
+      <div className="px-4 pb-4 text-xs text-slate-400">
+        {nombre ?? "Sin perfil"}
+        {rol && ` · ${NOMBRE_ROL[rol]}`}
+      </div>
       <nav className="flex gap-1 overflow-x-auto px-2 pb-3 md:flex-col md:pb-0">
         {secciones.map((s) => {
           const activa = pathname.startsWith(s.href);
