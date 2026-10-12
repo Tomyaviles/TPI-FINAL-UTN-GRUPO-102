@@ -5,6 +5,7 @@ erDiagram
     PLANES ||--o{ SOCIOS : "tiene asignado"
     SOCIOS ||--o{ PAGOS : "realiza"
     SOCIOS ||--o{ ASISTENCIAS : "registra"
+    SEDES ||--o{ PERFILES : "trabaja en"
 
     SEDES {
         uuid id PK
@@ -51,4 +52,12 @@ erDiagram
         uuid socio_id FK
         uuid sede_id FK
         datetime fecha_hora
+    }
+
+    PERFILES {
+        uuid id PK
+        string nombre
+        string rol
+        uuid sede_id FK
+        datetime created_at
     }
