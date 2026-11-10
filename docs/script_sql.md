@@ -116,3 +116,24 @@ CREATE TABLE asistencias (
   -- Marca de tiempo (fecha y hora exacta del ingreso)
   fecha_hora TIMESTAMP WITH TIME ZONE DEFAULT NOW()
 );
+
+
+-- 6. TABLA: PERFILES
+-- Rol y sede de cada usuario que inicia sesión (Supabase Auth)
+CREATE TABLE perfiles (
+  -- Mismo identificador que el usuario en auth.users
+  -- ON DELETE CASCADE: si se elimina el usuario, se elimina su perfil
+  id UUID PRIMARY KEY REFERENCES auth.users(id) ON DELETE CASCADE,
+  
+  -- Nombre para mostrar
+  nombre TEXT,
+  
+  -- Rol del usuario: define pantallas y permisos
+  rol TEXT NOT NULL CHECK (rol IN ('admin', 'recepcion', 'profesor', 'socio')),
+  
+  -- CLAVE FORÁNEA: Sede donde trabaja (recepción/profesor). NULL para el administrador
+  sede_id UUID REFERENCES sedes(id),
+  
+  -- Fecha de creación del perfil
+  created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
+);
