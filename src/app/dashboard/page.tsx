@@ -5,6 +5,7 @@ import {
   contarActivos,
   filtrarPorSede,
   formatearPesos,
+  hoyComoTexto,
   inicioDelMes,
   sumarRecaudacion,
 } from "@/lib/metricas";
@@ -28,7 +29,7 @@ export default async function DashboardPage({
   // Traemos todo en paralelo y después calculamos en JS
   const [sedesRes, sociosRes, planesRes, pagosRes] = await Promise.all([
     supabase.from("sedes").select("id, nombre").order("nombre"),
-    supabase.from("socios").select("id, sede_id, plan_id, estado_cuota"),
+    supabase.from("socios").select("id, sede_id, plan_id, estado_cuota, fecha_vencimiento"),
     supabase.from("planes").select("id, precio"),
     supabase.from("pagos").select("socio_id, monto").gte("fecha_pago", inicioDelMes()),
   ]);
@@ -47,14 +48,15 @@ export default async function DashboardPage({
 
   const sedes = sedesRes.data ?? [];
   const socios = filtrarPorSede(sociosRes.data ?? [], sedeId);
-  const activos = contarActivos(socios);
+  const hoy = hoyComoTexto();
+  const activos = contarActivos(socios, hoy);
   const recaudacion = sumarRecaudacion(pagosRes.data ?? [], socios);
-  const morosos = calcularMorosos(socios, planesRes.data ?? []);
+  const morosos = calcularMorosos(socios, planesRes.data ?? [], hoy);
 
   const tarjetas = [
     { titulo: "Socios activos", valor: String(activos), detalle: `de ${socios.length} socios` },
     { titulo: "Recaudación del mes", valor: formatearPesos(recaudacion), detalle: "pagos desde el día 1" },
-    { titulo: "Morosos", valor: String(morosos.cantidad), detalle: "vencidos o suspendidos" },
+    { titulo: "Morosos", valor: String(morosos.cantidad), detalle: "cuota vencida o suspendidos" },
     { titulo: "Monto adeudado", valor: formatearPesos(morosos.monto), detalle: "una cuota por moroso" },
   ];
 
