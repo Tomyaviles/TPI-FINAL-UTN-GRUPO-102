@@ -61,7 +61,27 @@ Sistema web multisede enfocado en la administración integral de gimnasios. La s
 * [`/docs`](./docs): Documentación técnica e informes del proyecto.
   * [`ESQUEMA_BD.md`](./docs/ESQUEMA_BD.md): Diagrama Entidad-Relación y definición del modelo de datos.
   * [`MODULOS.md`](./docs/MODULOS.md): Listado de módulos del sistema y mapeo a la arquitectura del repositorio.
+  * [`USUARIOS_ADMIN.md`](./docs/USUARIOS_ADMIN.md): Cómo crear tu usuario admin para desarrollo.
 * `/src`: Código fuente de la aplicación *(en desarrollo)*.
+* `/supabase`: Migraciones de la base de datos (`migrations/`) y datos de prueba (`seed.sql`).
+
+---
+
+## Cómo correr el proyecto
+
+1. Instalar dependencias:
+   ```bash
+   npm install
+   ```
+2. Copiar `.env.example` como `.env.local` y completar la URL y la publishable key del proyecto de Supabase (Project Settings → API Keys).
+3. Levantar el servidor de desarrollo:
+   ```bash
+   npm run dev
+   ```
+   Abrir [http://localhost:3000](http://localhost:3000) e iniciar sesión con tu usuario admin (ver [`docs/USUARIOS_ADMIN.md`](./docs/USUARIOS_ADMIN.md)). El Dashboard muestra la cantidad de registros por tabla para confirmar que la conexión funciona.
+
+**Base de datos:** el esquema está en `supabase/migrations/` y los datos de prueba en `supabase/seed.sql`. Cualquier cambio a las tablas se hace con una migración nueva, avisando al grupo.
+
 ---
 
 ## Estado de Entregas y Cronograma

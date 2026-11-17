@@ -29,6 +29,18 @@ Clave foránea: asistencias.sede_id ➔ sedes.id
 
 Descripción: Registra en qué sede física específica ocurrió la asistencia, independientemente de la sede de origen del socio (soporte para socios en tránsito multisede).
 
+sedes 1 ─── N perfiles (Una sede tiene muchos empleados)
+
+Clave foránea: perfiles.sede_id ➔ sedes.id
+
+Descripción: Indica en qué sede trabaja el personal de recepción o los profesores. Para el administrador queda vacío (NULL), ya que gestiona todas las sedes.
+
+auth.users 1 ─── 1 perfiles (Cada usuario del sistema tiene un perfil)
+
+Clave foránea: perfiles.id ➔ auth.users.id
+
+Descripción: Supabase Auth guarda el email y la contraseña; la tabla perfiles completa esa información con el rol del usuario, que define a qué pantallas y acciones tiene acceso.
+
 📑 Detalle de Tablas y Entidades
 1. sedes
 Almacena las sedes físicas de la cadena de gimnasios para permitir la gestión multisede.
@@ -89,9 +101,22 @@ sede_id (UUID, FK): Sede donde se registra el acceso.
 
 fecha_hora (TIMESTAMP): Fecha y hora del molinete/validación.
 
+6. perfiles
+Rol y sede de cada usuario que inicia sesión en el sistema.
+
+id (UUID, PK, FK): Mismo identificador que el usuario en auth.users de Supabase.
+
+nombre (TEXT): Nombre para mostrar del usuario.
+
+rol (TEXT): Rol asignado ('admin', 'recepcion', 'profesor', 'socio').
+
+sede_id (UUID, FK, opcional): Sede donde trabaja; NULL para el administrador.
+
 ⚙️ Reglas de Negocio Integradas en el Esquema
 Validación de Ingreso en Puerta: Para dar paso en recepción no hace falta calcular dinámicamente todo el historial de pagos. La API consulta directamente las columnas estado_cuota y fecha_vencimiento de la tabla socios.
 
 Identificación de Morosos: Si fecha_vencimiento < fecha actual, el sistema pasa el estado_cuota a 'vencido', denegando el acceso y habilitando el envío de avisos automáticos de cobro.
 
 Acceso Móvil Opcional: La columna user_id de la tabla socios es opcional (acepta valores NULL). Esto permite que un recepcionista dé de alta a un socio de forma inmediata sin obligarlo a crear una cuenta o correo en el momento.
+
+Control de Acceso por Rol: Cada usuario que inicia sesión tiene un registro en perfiles con su rol. El sistema consulta ese rol para decidir qué pantallas mostrar y qué operaciones permitir (por ejemplo, solo el administrador puede crear planes o ver el dashboard).
