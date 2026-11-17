@@ -2,15 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { createClient } from '@/lib/supabase/client';
-
-interface Pago {
-  id: string;
-  monto: number;
-  metodo_pago: string;
-  fecha_pago: string;
-  periodo_mes: number;
-  periodo_anio: number;
-}
+import type { Pago } from '@/types/database';
 
 export default function HistorialPagos({ socioId }: { socioId: string }) {
   const supabase = createClient();

@@ -5,7 +5,8 @@ import type { Rol } from "@/types/database";
 // Si se agrega una pantalla nueva, se suma acá y aparece en el menú.
 export const SECCIONES: { href: string; label: string; roles: Rol[] }[] = [
   { href: "/dashboard", label: "Dashboard", roles: ["admin"] },
-  { href: "/socios", label: "Socios y Sedes", roles: ["admin", "recepcion"] },
+  { href: "/socios", label: "Socios", roles: ["admin", "recepcion"] },
+  { href: "/sedes", label: "Sedes", roles: ["admin"] },
   { href: "/planes", label: "Planes", roles: ["admin"] },
   { href: "/cobros", label: "Cobros", roles: ["admin", "recepcion"] },
   { href: "/ingreso", label: "Ingreso", roles: ["admin", "recepcion", "socio"] },

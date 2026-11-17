@@ -1,8 +1,9 @@
 // components/cobros/FormularioCobro.tsx
 import React from 'react';
+import type { SocioCobro } from './tipos';
 
 interface FormularioCobroProps {
-  socioSeleccionado: any;
+  socioSeleccionado: SocioCobro | null;
   monto: number | '';
   setMonto: (monto: number | '') => void;
   metodoPago: string;

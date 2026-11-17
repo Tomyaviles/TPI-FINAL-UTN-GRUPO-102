@@ -4,18 +4,19 @@ import { createClient } from '@/lib/supabase/client';
 import BuscadorSocio from '@/components/cobros/BuscadorSocio';
 import FormularioCobro from '@/components/cobros/FormularioCobro';
 import TablaMorosos from '@/components/cobros/TablaMoroso';
+import type { SocioCobro, Moroso } from './tipos';
 
 export default function PantallaCobros() {
   const supabase = createClient();
   
   const [busqueda, setBusqueda] = useState('');
-  const [sociosEncontrados, setSociosEncontrados] = useState<any[]>([]);
-  const [socioSeleccionado, setSocioSeleccionado] = useState<any | null>(null);
+  const [sociosEncontrados, setSociosEncontrados] = useState<SocioCobro[]>([]);
+  const [socioSeleccionado, setSocioSeleccionado] = useState<SocioCobro | null>(null);
   const [monto, setMonto] = useState<number | ''>('');
   const [metodoPago, setMetodoPago] = useState('efectivo');
   const [cargando, setCargando] = useState(false);
   const [mensaje, setMensaje] = useState<{ tipo: 'exito' | 'error'; texto: string } | null>(null);
-  const [morosos, setMorosos] = useState<any[]>([]);
+  const [morosos, setMorosos] = useState<Moroso[]>([]);
 
   useEffect(() => {
     cargarMorosos();
@@ -44,20 +45,18 @@ export default function PantallaCobros() {
       .from('socios')
       .select('id, nombre, apellido, dni, fecha_vencimiento, estado_cuota, planes(nombre, precio)')
       .or(`dni.ilike.%${query}%,nombre.ilike.%${query}%,apellido.ilike.%${query}%`)
-      .limit(5);
+      .limit(5)
+      .returns<SocioCobro[]>();
 
     if (data) setSociosEncontrados(data);
   };
 
-  const seleccionarSocio = (socio: any) => {
+  const seleccionarSocio = (socio: SocioCobro) => {
     setSocioSeleccionado(socio);
     setSociosEncontrados([]);
     setBusqueda(`${socio.nombre} ${socio.apellido} (${socio.dni})`);
     if (socio.planes?.precio) {
       setMonto(socio.planes.precio);
-    } else if (socio.plan_precio) {
-      // Por si viene de la tabla de morosos
-      setMonto(socio.plan_precio);
     }
   };
 
@@ -70,7 +69,7 @@ export default function PantallaCobros() {
 
     const hoy = new Date();
     const { error } = await supabase.rpc('registrar_pago', {
-      p_socio_id: socioSeleccionado.id ?? socioSeleccionado.socio_id,
+      p_socio_id: socioSeleccionado.id,
       p_monto: Number(monto),
       p_metodo_pago: metodoPago,
       p_periodo_mes: hoy.getMonth() + 1,

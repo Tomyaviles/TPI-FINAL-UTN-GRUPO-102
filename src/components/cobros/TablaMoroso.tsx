@@ -1,9 +1,9 @@
 // components/cobros/TablaMorosos.tsx
-import React from 'react';
+import type { Moroso } from './tipos';
 
 interface TablaMorososProps {
-  morosos: any[];
-  onSeleccionarParaCobrar: (m: any) => void;
+  morosos: Moroso[];
+  onSeleccionarParaCobrar: (m: Moroso) => void;
 }
 
 export default function TablaMorosos({ morosos, onSeleccionarParaCobrar }: TablaMorososProps) {

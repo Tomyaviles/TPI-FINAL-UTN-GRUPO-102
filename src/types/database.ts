@@ -78,8 +78,33 @@ export type Database = {
       asistencias: Tabla<Asistencia, "socio_id">;
       perfiles: Tabla<Perfil, "id" | "rol">;
     };
-    Views: Record<string, never>;
-    Functions: Record<string, never>;
+    Views: {
+      v_socios_morosos: {
+        Row: {
+          socio_id: string;
+          nombre: string;
+          apellido: string;
+          dni: string;
+          fecha_vencimiento: string | null;
+          plan_nombre: string | null;
+          plan_precio: number | null;
+          dias_atraso: number;
+        };
+        Relationships: [];
+      };
+    };
+    Functions: {
+      registrar_pago: {
+        Args: {
+          p_socio_id: string;
+          p_monto: number;
+          p_metodo_pago: string;
+          p_periodo_mes: number;
+          p_periodo_anio: number;
+        };
+        Returns: { success: boolean; nueva_fecha_vencimiento: string };
+      };
+    };
     Enums: Record<string, never>;
     CompositeTypes: Record<string, never>;
   };

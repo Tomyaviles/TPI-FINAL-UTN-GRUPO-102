@@ -1,12 +1,12 @@
 // components/cobros/BuscadorSocio.tsx
-import React from 'react';
+import type { SocioCobro } from './tipos';
 
 interface BuscadorSocioProps {
   busqueda: string;
   setBusqueda: (query: string) => void;
   buscarSocios: (query: string) => void;
-  sociosEncontrados: any[];
-  seleccionarSocio: (socio: any) => void;
+  sociosEncontrados: SocioCobro[];
+  seleccionarSocio: (socio: SocioCobro) => void;
 }
 
 export default function BuscadorSocio({
