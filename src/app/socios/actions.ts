@@ -105,7 +105,7 @@ function informarExito(mensaje: string): never {
 }
 
 export async function crearSocio(formData: FormData) {
-  await requerirRol(["admin"]);
+  await requerirRol(["admin", "recepcion"]);
 
   const datos = validarDatos(formData);
 
@@ -132,7 +132,7 @@ export async function crearSocio(formData: FormData) {
 }
 
 export async function actualizarSocio(formData: FormData) {
-  await requerirRol(["admin"]);
+  await requerirRol(["admin", "recepcion"]);
 
   const id = obtenerTexto(formData, "id");
   const datos = validarDatos(formData);

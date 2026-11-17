@@ -32,7 +32,8 @@ const coloresEstado: Record<EstadoCuota, string> = {
 export default async function SociosPage({
   searchParams,
 }: Props) {
-  await requerirRol(["admin"]);
+  // Recepción también entra: el RLS le muestra solo los socios de su sede
+  await requerirRol(["admin", "recepcion"]);
 
   const params = await searchParams;
   const supabase = await createClient();

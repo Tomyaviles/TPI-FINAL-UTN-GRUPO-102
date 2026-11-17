@@ -15,8 +15,9 @@ type Props = {
 };
 
 export default async function DetalleSocioPage({ params }: Props) {
-  // Verificar que el usuario tenga permisos de administrador.
-  await requerirRol(["admin"]);
+  // Admin y recepción pueden ver y editar la ficha (recepción solo de su sede, por RLS)
+  const perfil = await requerirRol(["admin", "recepcion"]);
+  const esAdmin = perfil.rol === "admin";
 
   // Obtener el identificador del socio desde la URL.
   const { id } = await params;
@@ -208,7 +209,8 @@ export default async function DetalleSocioPage({ params }: Props) {
         />
       </section>
 
-      {/* Suspensión */}
+      {/* Suspensión: solo el admin */}
+      {esAdmin && (
       <section className="rounded-xl border border-red-200 bg-white p-6 shadow-sm">
         <h2 className="mb-2 text-xl font-semibold text-slate-900">
           Suspensión del socio
@@ -226,6 +228,7 @@ export default async function DetalleSocioPage({ params }: Props) {
           suspendido={socio.estado_cuota === "suspendido"}
         />
       </section>
+      )}
     </main>
   );
 }
