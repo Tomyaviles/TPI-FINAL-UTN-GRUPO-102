@@ -7,6 +7,8 @@ import { createClient } from "@/lib/supabase/server";
 
 import SocioForm from "@/components/socios/SocioForm";
 import SuspenderSocioButton from "@/components/socios/SuspenderSocioButton";
+import HistorialPagos from "@/components/cobros/HistorialPagos";
+import HistorialAsistencias from "@/components/socios/HistorialAsistencias";
 
 import type { Socio, Sede, Plan } from "@/types/database";
 
@@ -15,41 +17,24 @@ type Props = {
 };
 
 export default async function DetalleSocioPage({ params }: Props) {
-  // Verificar que el usuario tenga permisos de administrador.
+  // La ampliación de permisos para recepción se integra por separado.
   await requerirRol(["admin"]);
 
-  // Obtener el identificador del socio desde la URL.
   const { id } = await params;
-
   const supabase = await createClient();
 
-  // Consultar socio, sedes y planes en paralelo.
   const [socioResult, sedesResult, planesResult] = await Promise.all([
-    supabase
-      .from("socios")
-      .select("*")
-      .eq("id", id)
-      .maybeSingle(),
-
-    supabase
-      .from("sedes")
-      .select("*")
-      .order("nombre"),
-
-    supabase
-      .from("planes")
-      .select("*")
-      .order("nombre"),
+    supabase.from("socios").select("*").eq("id", id).maybeSingle(),
+    supabase.from("sedes").select("*").order("nombre"),
+    supabase.from("planes").select("*").order("nombre"),
   ]);
 
-  // Manejar errores de consulta.
   if (socioResult.error) {
     throw new Error(
       `No se pudo consultar el socio: ${socioResult.error.message}`
     );
   }
 
-  // Mostrar 404 si el socio no existe.
   if (!socioResult.data) {
     notFound();
   }
@@ -191,6 +176,34 @@ export default async function DetalleSocioPage({ params }: Props) {
         </dl>
       </section>
 
+      {/* Historial de pagos */}
+      <section className="rounded-xl border border-slate-200 bg-white p-6 shadow-sm">
+        <h2 className="mb-2 text-xl font-semibold text-slate-900">
+          Historial de pagos
+        </h2>
+
+        <p className="mb-5 text-sm text-slate-600">
+          Consultá los pagos registrados y los períodos abonados
+          por el socio.
+        </p>
+
+        <HistorialPagos socioId={socio.id} />
+      </section>
+
+      {/* Historial de asistencias */}
+      <section className="rounded-xl border border-slate-200 bg-white p-6 shadow-sm">
+        <h2 className="mb-2 text-xl font-semibold text-slate-900">
+          Historial de asistencias
+        </h2>
+
+        <p className="mb-5 text-sm text-slate-600">
+          Consultá las fechas, los horarios y las sedes de los
+          ingresos registrados.
+        </p>
+
+        <HistorialAsistencias socioId={socio.id} />
+      </section>
+
       {/* Formulario de edición */}
       <section className="rounded-xl border border-slate-200 bg-white p-6 shadow-sm">
         <h2 className="mb-2 text-xl font-semibold text-slate-900">
@@ -208,7 +221,7 @@ export default async function DetalleSocioPage({ params }: Props) {
         />
       </section>
 
-      {/* Suspensión */}
+      {/* Suspensión exclusiva del administrador */}
       <section className="rounded-xl border border-red-200 bg-white p-6 shadow-sm">
         <h2 className="mb-2 text-xl font-semibold text-slate-900">
           Suspensión del socio
